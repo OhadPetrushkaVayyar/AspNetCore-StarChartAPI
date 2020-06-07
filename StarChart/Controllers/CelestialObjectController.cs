@@ -20,6 +20,11 @@ namespace StarChart.Controllers
         {
             _context = context;
         }
+        /// <summary>
+        /// Lookup CelestialObject By it's numerical Id
+        /// </summary>
+        /// <param name="id">Id of Object to lookup</param>
+        /// <returns></returns>
         [HttpGet("{id:int}", Name ="GetById")]
         public IActionResult GetById(int id)
         {
@@ -73,7 +78,7 @@ namespace StarChart.Controllers
             return NoContent();
         }
         [HttpPatch("{id}/{name}")]
-        public IActionResult RenameObject(int id, string name)
+        public IActionResult RenameObject([FromRoute]int id, [FromRoute]string name)
         {
             var existingObject = _context.CelestialObjects.Find(id);
             if (existingObject == null)
